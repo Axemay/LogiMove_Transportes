@@ -1,0 +1,104 @@
+# Criação das tabelas
+
+CREATE TABLE Drivers (DriverID INT PRIMARY KEY, Nome VARCHAR(100), CNH VARCHAR(20), Endereço VARCHAR(200), Contato VARCHAR(50));
+GO
+
+CREATE TABLE Clients (ClientID INT PRIMARY KEY, Nome VARCHAR(100), Empresa VARCHAR(100), Endereço VARCHAR(200), Contato VARCHAR(50));
+GO
+
+CREATE TABLE Orders (OrderID INT PRIMARY KEY, ClientID INT, DriverID INT, DetalhesPedido TEXT, DataEntrega DATE, Status VARCHAR(50), FOREIGN KEY (ClientID) REFERENCES Clients(ClientID), FOREIGN KEY (DriverID) REFERENCES Drivers(DriverID));
+GO
+
+
+
+SELECT name FROM sys.tables;
+GO
+
+
+# Populando as tabelas
+
+
+INSERT INTO Drivers (DriverID, Nome, CNH, Endereço, Contato) VALUES (754, 'João Silva', '123456', 'Rua Azul, 3', 'joaosilva@gmail.com');
+GO
+
+#Atualizando o dado contato
+
+UPDATE Drivers SET contato = '9999-99990' WHERE Nome = 'João Silva';
+GO
+
+# Populando com mais dados
+
+INSERT INTO Drivers (DriverID, Nome, CNH, Endereço, Contato) VALUES  (2, 'Pedro Vaz', '123456789', 'Rua A, 123', 'oaosilva@gmail.com'), (3, 'Maria Santos', '987654321', 'Rua B, 456', ''mariasantos@gmail.com''), (4, 'Carlos Oliveira', '456123789', 'Rua C, 789', 'carlosoliveira@gmail.com');
+GO
+
+
+INSERT INTO Clients (ClientID, Nome, Empresa, Endereço, Contato) VALUES (1, 'Empresa X', 'Cliente A', 'Av. Principal, 100', '1111-1111'),  (2, 'Empresa Y', 'Cliente B', 'Av. Secundária, 200', '2222-2222'), (3, 'Empresa Z', 'Cliente C', 'Av. Terciária, 300', '3333-3333');
+GO
+
+
+INSERT INTO Orders (OrderID, ClientID, DriverID, DetalhesPedido, DataEntrega, Status) VALUES (1, 1, 1, 'Detalhes do pedido 1', '2024-03-01', 'Pendente'),  (2, 2, 2, 'Detalhes do pedido 2', '2024-03-02', 'Em andamento'),  (3, 3, 3, 'Detalhes do pedido 3', '2024-03-03', 'Concluído');
+GO
+
+
+# Consultas
+
+SELECT * FROM Drivers;
+GO
+
+SELECT * FROM Clients;
+GO
+
+
+SELECT * FROM Orders;
+GO
+
+
+SELECT * FROM Orders WHERE Status = 'Concluído';
+GO
+
+
+SELECT Nome FROM Drivers ORDER BY Nome;
+GO
+
+
+SELECT OrderID, DetalhesPedido FROM Orders WHERE Status = 'Pendente';
+GO
+
+SELECT Clients.Nome AS Cliente, Orders.* FROM Clients JOIN Orders ON Clients.ClientID = Orders.ClientID;
+GO
+
+SELECT * FROM Orders WHERE DataEntrega > '2024-03-02';
+GO
+
+
+# Outras demonstrações CRUD
+# insert
+
+INSERT INTO Drivers (DriverID, Nome, CNH, Endereço, Contato) VALUES (5, 'Ana Souza', '789012', 'Rua D, 1234', '8888-8885');
+GO
+
+INSERT INTO Clients (ClientID, Nome, Empresa, Endereço, Contato) VALUES (4, 'Empresa W', 'Cliente D', 'Av. Quarta, 400', '4444-4444');
+GO
+
+INSERT INTO Orders (OrderID, ClientID, DriverID, DetalhesPedido, DataEntrega, Status) VALUES (4, 4, 5, 'Detalhes do pedido 4', '2024-03-04', 'Pendente');
+GO
+
+
+#SELECT
+SELECT Nome FROM Drivers;
+GO
+
+SELECT Empresa FROM Clients WHERE Nome ='Cliente B';
+GO
+
+#UPDATE
+UPDATE Drivers SET Contato = '9999-99991' WHERE Nome = 'João Silva';
+GO
+
+UPDATE Orders SET Status = 'Entregue' WHERE OrderID = 1;
+GO
+
+
+#DELETE
+DELETE FROM Orders WHERE OrderID = 2;
+DELETE FROM Drivers WHERE DriverID = 4;
