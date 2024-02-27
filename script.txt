@@ -3,6 +3,11 @@
 CREATE TABLE Drivers (DriverID INT PRIMARY KEY, Nome VARCHAR(100), CNH VARCHAR(20), Endereço VARCHAR(200), Contato VARCHAR(50));
 GO
 
+
+CREATE INDEX IDX_Nome_Drivers ON Drivers (Nome);
+GO
+
+
 CREATE TABLE Clients (ClientID INT PRIMARY KEY, Nome VARCHAR(100), Empresa VARCHAR(100), Endereço VARCHAR(200), Contato VARCHAR(50));
 GO
 
@@ -28,15 +33,21 @@ GO
 
 # Populando com mais dados
 
-INSERT INTO Drivers (DriverID, Nome, CNH, Endereço, Contato) VALUES  (2, 'Pedro Vaz', '123456789', 'Rua A, 123', 'oaosilva@gmail.com'), (3, 'Maria Santos', '987654321', 'Rua B, 456', ''mariasantos@gmail.com''), (4, 'Carlos Oliveira', '456123789', 'Rua C, 789', 'carlosoliveira@gmail.com');
+INSERT INTO Drivers (DriverID, Nome, CNH, Endereço, Contato) VALUES  (2, 'Pedro Vaz', '123456789', 'Rua A, 123', '7894-5612');
+GO
+
+INSERT INTO Drivers (DriverID, Nome, CNH, Endereço, Contato) VALUES(3, 'Maria Santos', '987654321', 'Rua B, 456', '0008-7412'); 
+GO
+
+INSERT INTO Drivers (DriverID, Nome, CNH, Endereço, Contato) VALUES (4, 'Carlos Oliveira', '456123789', 'Rua C, 789', '0845-7962');
 GO
 
 
-INSERT INTO Clients (ClientID, Nome, Empresa, Endereço, Contato) VALUES (1, 'Empresa X', 'Cliente A', 'Av. Principal, 100', '1111-1111'),  (2, 'Empresa Y', 'Cliente B', 'Av. Secundária, 200', '2222-2222'), (3, 'Empresa Z', 'Cliente C', 'Av. Terciária, 300', '3333-3333');
+INSERT INTO Clients (ClientID, Nome, Empresa, Endereço, Contato) VALUES (1, 'Empresa X', 'Cliente A', 'Av. Principal, 100', '1164-7891'),  (2, 'Empresa Y', 'Cliente B', 'Av. Secundária, 200', '8745-9123'), (3, 'Empresa Z', 'Cliente C', 'Av. Terciária, 300', '96874-3633');
 GO
 
 
-INSERT INTO Orders (OrderID, ClientID, DriverID, DetalhesPedido, DataEntrega, Status) VALUES (1, 1, 1, 'Detalhes do pedido 1', '2024-03-01', 'Pendente'),  (2, 2, 2, 'Detalhes do pedido 2', '2024-03-02', 'Em andamento'),  (3, 3, 3, 'Detalhes do pedido 3', '2024-03-03', 'Concluído');
+INSERT INTO Orders (OrderID, ClientID, DriverID, DetalhesPedido, DataEntrega, Status) VALUES (1, 1, 754, 'Detalhes do pedido 1', '2024-03-01', 'Pendente'),  (2, 2, 2, 'Detalhes do pedido 2', '2024-03-02', 'Em andamento'),  (3, 3, 3, 'Detalhes do pedido 3', '2024-03-03', 'Concluído');
 GO
 
 
